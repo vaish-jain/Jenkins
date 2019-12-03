@@ -2,7 +2,10 @@ pipeline {
     agent any
     stages{
         stage('Git Checkout'){
-            git credentialsId: 'gitcred', url: 'https://github.com/vaish-jain/Jenkins.git'
+          steps{
+           
+             git credentialsId: 'gitcred', url: 'https://github.com/vaish-jain/Jenkins.git'
+          }
         }
         
     }
