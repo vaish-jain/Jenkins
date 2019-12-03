@@ -11,8 +11,12 @@ pipeline {
         stage('Build'){
           steps{
 
-             sh "mvn clean install"
-             sh "mv target/*.war target/demo.war"
+             sh """
+                cd hello-wold-war
+                mvn clean install
+                mv target/*.war target/demo.war
+            
+             """
           }
         }
 
