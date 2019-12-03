@@ -34,9 +34,9 @@ pipeline {
           steps{
 
              sh """
-                cp hello-world-war/target/demo.war /opt/tomcat8/webapps/
-                /opt/tomcat8/bin/shutdown.sh
-                /opt/tomcat8/bin/startup.sh               
+                cp hello-world-war/target/demo.war /home/ec2-user/tomcat/webapps/
+                /home/ec2-user/tomcat/bin/shutdown.sh
+                /home/ec2-user/tomcat/bin/startup.sh               
 
              """
           }
