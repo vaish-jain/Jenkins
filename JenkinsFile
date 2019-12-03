@@ -4,7 +4,7 @@ pipeline {
         stage('Git Checkout'){
           steps{
            
-             git credentialsId: 'gitcred', url: 'https://github.com/vaish-jain/Jenkins.git'
+             git credentialsId: 'gitcred', url: 'https://github.com/vaishalijain8/Vaishaliproject1.git'
           }
         }
         
@@ -29,5 +29,18 @@ pipeline {
              }
           }
         }
+
+        stage('Deploy'){
+          steps{
+
+             sh """
+                cp hello-world-war/target/demo.war /opt/tomcat8/webapps/
+                /opt/tomcat8/bin/shutdown.sh
+                /opt/tomcat8/bin/startup.sh               
+
+             """
+          }
+        }
+
     }
 }
