@@ -12,7 +12,7 @@ pipeline {
           steps{
 
              sh """
-                cd hello-wold-war
+                cd hello-world-war
                 mvn clean install
                 mv target/*.war target/demo.war
             
