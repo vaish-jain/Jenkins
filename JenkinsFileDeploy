@@ -7,7 +7,7 @@ pipeline {
      stage ('Pull Build code'){
        steps{
          withAWS(credentials: 'AWS-cred', region: 'us-east-2') {
-               s3Download bucket: 'jenkins-test1', file: 'demo.war', path: 'target/'
+               s3Download bucket: 'jenkins-test1', file: 'demo.war', path: 'target/demo.war'
          }
        }
      }
