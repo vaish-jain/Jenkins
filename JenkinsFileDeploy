@@ -19,7 +19,7 @@ pipeline {
        }
 
        steps{
-         sh "docker run -it -d -p 8081:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war --name 'Development' tomcat:8"
+         sh "docker run -it -d -p 8081:8080 -v $(pwd)/demo.war:/usr/local/tomcat/webapps/demo.war --name 'Development' tomcat:8"
        }
      }
 
@@ -30,7 +30,7 @@ pipeline {
        }
 
        steps{
-         sh "docker run -it -d -p 8082:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war --name 'QA' tomcat:8"
+         sh "docker run -it -d -p 8082:8080 -v $(pwd)/demo.war:/usr/local/tomcat/webapps/demo.war --name 'QA' tomcat:8"
        }
      }
 
@@ -41,7 +41,7 @@ pipeline {
        }
 
        steps{
-         sh "docker run -it -d -p 8083:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war --name 'UA' tomcat:8"
+         sh "docker run -it -d -p 8083:8080 -v $(pwd)/demo.war:/usr/local/tomcat/webapps/demo.war --name 'UA' tomcat:8"
        }
      }
    }
