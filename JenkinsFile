@@ -32,13 +32,8 @@ pipeline {
 
         stage('Deploy'){
           steps{
-
-             sh """
-                cp hello-world-war/target/demo.war /home/ec2-user/tomcat/webapps/
-                /home/ec2-user/tomcat/bin/shutdown.sh
-                /home/ec2-user/tomcat/bin/startup.sh               
-
-             """
+            
+            deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://13.59.244.133:8080/')], onFailure: false, war: '**/demo.war'
           }
         }
 
