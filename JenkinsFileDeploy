@@ -17,17 +17,9 @@ pipeline {
           // Only execute when environment is DEV
           expression { params.DEPLOY_ENV == 'DEV' }
        }
-       agent {
-         docker {
 
-           reuseNode true
-           image 'tomcat:8'
-           label 'Development'
-           args '-p 8081:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war'
-         }
-       }
        steps{
-         sh "ls /usr/local/tomcat/webapps/"
+         sh "docker run -p 8081:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war tomcat:8"
        }
      }
 
@@ -36,17 +28,9 @@ pipeline {
           // Only execute when environment is QA
           expression { params.DEPLOY_ENV == 'QA' }
        }
-       agent {
-         docker {
-
-           reuseNode true
-           image 'tomcat:8'
-           label 'Development'
-           args '-p 8082:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war'
-         }
-       }
+       
        steps{
-         sh "ls /usr/local/tomcat/webapps/"
+         sh "docker run -p 8082:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war tomcat:8"
        }
      }
 
@@ -55,17 +39,9 @@ pipeline {
           // Only execute when environment is UA
           expression { params.DEPLOY_ENV == 'UA' }
        }
-       agent {
-         docker {
 
-           reuseNode true
-           image 'tomcat:8'
-           label 'Development'
-           args '-p 8083:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war'
-         }
-       }
        steps{
-         sh "ls /usr/local/tomcat/webapps/"
+         sh "docker run -p 8083:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war tomcat:8"
        }
      }
    }
