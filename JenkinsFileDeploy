@@ -1,0 +1,62 @@
+pipeline {
+   agent any
+   parameters {
+      choice(name: 'DEPLOY_ENV', choices: ['DEV', 'QA', 'UA'], description: 'Please select any environment')
+   }
+   stages{
+     stage ('Pull Build code'){
+         withAWS(credentials: 'AWS-cred', region: 'us-east-2') {
+               s3Download bucket: 'jenkins-test1', file: 'demo.war', path: 'target/'
+         }
+     }
+
+     stage('Deploy on Dev'){
+       when {
+          // Only execute when environment is DEV
+          expression { params.DEPLOY_ENV == 'DEV' }
+       }
+       agent {
+         docker {
+
+           reuseNode true
+           image 'tomcat:8'
+           label 'Development'
+           args '-p 8081:8080, -v **/demo.war:/usr/local/tomcat/webapps/demo.war'
+         }
+       }
+     }
+
+     stage('Deploy on QA'){
+       when {
+          // Only execute when environment is QA
+          expression { params.DEPLOY_ENV == 'QA' }
+       }
+       agent {
+         docker {
+
+           reuseNode true
+           image 'tomcat:8'
+           label 'Development'
+           args '-p 8082:8080, -v **/demo.war:/usr/local/tomcat/webapps/demo.war'
+         }
+       }
+     }
+
+     stage('Deploy on UA'){
+       when {
+          // Only execute when environment is UA
+          expression { params.DEPLOY_ENV == 'UA' }
+       }
+       agent {
+         docker {
+
+           reuseNode true
+           image 'tomcat:8'
+           label 'Development'
+           args '-p 8083:8080, -v **/demo.war:/usr/local/tomcat/webapps/demo.war'
+         }
+       }
+     }
+   }
+}
+

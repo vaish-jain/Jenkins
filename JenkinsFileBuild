@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    stages{
+        stage('Git Checkout'){
+          steps{
+           
+             git credentialsId: 'gitcred', url: 'https://github.com/vaishalijain8/Vaishaliproject1.git'
+          }
+        }
+        
+        stage('Build'){
+          steps{
+
+             sh """
+                cd hello-world-war
+                mvn clean install
+                mv target/*.war target/demo.war
+            
+             """
+          }
+        }
+
+    }
+    post {
+       success {
+              // Upload files to s3 if build stage is successful
+              withAWS(credentials: 'AWS-cred', region: 'us-east-2') {
+               s3Upload acl: 'Private', bucket: 'jenkins-test1', file: 'demo.war', path: 'target/demo.war', text: 'Test upload', workingDir: 'hello-world-war'
+              }
+       }
+
+  }
+}
