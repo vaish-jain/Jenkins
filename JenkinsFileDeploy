@@ -23,7 +23,7 @@ pipeline {
            reuseNode true
            image 'tomcat:8'
            label 'Development'
-           args '-p 8081:8080 -v **/demo.war:/usr/local/tomcat/webapps/demo.war'
+           args '-p 8081:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war'
          }
        }
        steps{
@@ -42,7 +42,7 @@ pipeline {
            reuseNode true
            image 'tomcat:8'
            label 'Development'
-           args '-p 8082:8080, -v **/demo.war:/usr/local/tomcat/webapps/demo.war'
+           args '-p 8082:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war'
          }
        }
        steps{
@@ -61,7 +61,7 @@ pipeline {
            reuseNode true
            image 'tomcat:8'
            label 'Development'
-           args '-p 8083:8080, -v **/demo.war:/usr/local/tomcat/webapps/demo.war'
+           args '-p 8083:8080 -v demo.war:/usr/local/tomcat/webapps/demo.war'
          }
        }
        steps{
