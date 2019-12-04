@@ -24,6 +24,7 @@ pipeline {
               withAWS(credentials: 'AWS-cred', region: 'us-east-2') {
 
                s3Upload acl: 'Private', bucket: 'jenkins-test1', file: 'demo.war', path: 'target/demo.war', text: 'Test upload', workingDir: 'hello-world-war'
+              }
             }
           }
 
