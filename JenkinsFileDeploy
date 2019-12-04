@@ -26,6 +26,9 @@ pipeline {
            args '-p 8081:8080, -v **/demo.war:/usr/local/tomcat/webapps/demo.war'
          }
        }
+       steps{
+         sh "ls /usr/local/tomcat/webapps/"
+       }
      }
 
      stage('Deploy on QA'){
@@ -42,6 +45,9 @@ pipeline {
            args '-p 8082:8080, -v **/demo.war:/usr/local/tomcat/webapps/demo.war'
          }
        }
+       steps{
+         sh "ls /usr/local/tomcat/webapps/"
+       }
      }
 
      stage('Deploy on UA'){
@@ -57,6 +63,9 @@ pipeline {
            label 'Development'
            args '-p 8083:8080, -v **/demo.war:/usr/local/tomcat/webapps/demo.war'
          }
+       }
+       steps{
+         sh "ls /usr/local/tomcat/webapps/"
        }
      }
    }
